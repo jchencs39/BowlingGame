@@ -1,0 +1,70 @@
+﻿@model BowlingGameModel
+@{
+    ViewData["Title"] = "Bowling Game";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Bowling Game</h1>
+    <div class="row mt-5 mb-3">
+        <div class="col-md-2">
+            <form asp-controller="Home" asp-action="index" method="post">
+                <nav class="navbar navbar-expand">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="ml-3">
+                            <input id="playRandom" name="submitButton" type="submit" value="Play Random" class="btn btn-secondary btn-block p-2" />
+                        </li>
+                        <li class="ml-3">
+                            <input id="playStrike" name="submitButton" type="submit" value="Play Strike" class="btn btn-secondary btn-block p-2 " />
+                        </li>
+                        <li class="ml-3">
+                            <input id="playSpare" name="submitButton" type="submit" value="Play Spare" class="btn btn-secondary btn-block p-2 " />
+                        </li>
+                        <li class="ml-3">
+                            <input id="playSpare" name="submitButton" type="submit" value="Play Tenth" class="btn btn-secondary btn-block p-2 " />
+                        </li>                       
+                        <li class="ml-3">
+                            <input id="playSpare" name="submitButton" type="submit" value="Play Perfect" class="btn btn-secondary btn-block p-2" />
+                        </li>
+                    </ul>
+                </nav>
+            </form>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Frame</th>
+                <th scope="col">Roll1</th>
+                <th scope="col">Roll2</th>
+                <th scope="col">Roll3</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i <= Model.rollArray.GetUpperBound(0); i++)
+            {
+                <tr>
+                    <td><b>@(i+1) </b></td>
+
+                    <td> @Model.rollArray[i, 0]</td>
+
+                    <td>@Model.rollArray[i, 1]</td>
+                    @if (i == 9)
+                    {
+                        <td>@Model.bonus</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                </tr>
+
+            }
+            <tr>
+                <td colspan="4">
+                    <h4 class="text-left">Final Score: @Model.score.ToString()</h4>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
